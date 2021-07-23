@@ -1,19 +1,16 @@
+import { Fragment } from "react"
+
 import Head from "next/head"
-import Header from "../components/Header"
 import Banner from "../components/Banner"
 import ProductFeed from "../components/ProductFeed"
+import Wrapper from "../components/Wrapper"
 
 export default function Home({products}) {
   return (
-    <div>
+    <Wrapper>
       <Head>
         <title>Amazon 2.0.0</title>
       </Head>
-      
-      {/* Header */}
-
-      <Header />
-
       <main className="max-w-screen-2xl mx-auto">
         {/* Banner */}
         <Banner />
@@ -22,7 +19,7 @@ export default function Home({products}) {
         <ProductFeed products={products} />
       </main>
 
-    </div>
+    </Wrapper>
   );
 }
 

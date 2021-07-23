@@ -6,6 +6,7 @@ const ProductFeed = ({products}) => {
             {products.slice(0, 4).map(({title, image, id, price, description, category}) => (
                 <Product
                 key={id}
+                id={id}
                 title={title}
                 price={price}
                 description={description}
@@ -14,12 +15,13 @@ const ProductFeed = ({products}) => {
                 />
             ))}
 
-            <img className="md:col-span-full" src="https://links.papareact.com/dyz" alt="" />
+            <img className="md:col-span-full mx-auto" src="https://links.papareact.com/dyz" alt="" />
 
             <div className="md:col-span-2">
                 {products.slice(4, 5).map(({title, image, id, price, description, category}) => (
                 <Product
                 key={id}
+                id={id}
                 title={title}
                 price={price}
                 description={description}
@@ -32,6 +34,7 @@ const ProductFeed = ({products}) => {
             {products.slice(5, products.length-1).map(({title, image, id, price, description, category}) => (
                 <Product
                 key={id}
+                id={id}
                 title={title}
                 price={price}
                 description={description}

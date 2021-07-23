@@ -1,13 +1,23 @@
 import Image from "next/image"
+import { useSelector } from "react-redux"
+import { useRouter } from "next/dist/client/router"
+import { useState } from "react"
 
 import { MenuIcon, SearchIcon, ShoppingCartIcon } from "@heroicons/react/outline"
 
+import { selectTotalQuantity } from "../slices/basketSlice"
+
+import LoginPop from "./UI/LoginPop"
+
 const Header = () => {
+    const totalQuantity = useSelector(selectTotalQuantity)
+    const router = useRouter()
+    
     return (
-        <header>
+        <header className="sticky top-0 z-50">
             {/* Top nav */}
             <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
-                <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
+                <div className="mt-2 flex items-center flex-grow sm:flex-grow-0" onClick={() => router.push("/")}>
                     <Image src="https://links.papareact.com/f90" width={150} height={40} objectFit="contain" className="cursor-pointer" />
                 </div>
             
@@ -19,19 +29,18 @@ const Header = () => {
 
             {/* Right */}
             <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
-                <div className="link">
+                <div className="link" onClick={() => router.push("/signin")} >
                     <p>Hello Erasmus Antwi</p>
                     <p className="font-extrabold md:text-sm">Account & Lists</p>
                 </div>
-
                 <div className="link">
                     <p>Returns</p>
                     <p className="font-extrabold md:text-sm">& Orders</p>
                 </div>
 
-                <div className="relative link flex items-center">
+                <div className="relative link flex items-center" onClick={() => router.push("/checkout")}>
                     <ShoppingCartIcon className="h-10" />
-                    <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 rounded-full text-center text-black font-bold">0</span>
+                    <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 rounded-full text-center text-black font-bold">{totalQuantity}</span>
                     <p className="hidden sm:inline mt-2 font-extrabold md:text-sm">Basket</p>
                 </div>
             </div>
