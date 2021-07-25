@@ -5,14 +5,12 @@ const basketSlice = createSlice({
   initialState: {
     items: [],
     totalQuantity: 0,
-    totalAmount: 0
   },
   reducers: {
     addToBasket(state, action) {
       const newItem = action.payload;
       const existingItem = state.items.find(item => item.id === newItem.id);
       state.totalQuantity++;
-      state.totalAmount = state.totalAmount + (newItem.price * newItem.quantity)
       if(!existingItem) {
         state.items.push({
           id: newItem.id,
@@ -36,11 +34,9 @@ const basketSlice = createSlice({
       state.totalQuantity--;
       if(existingItem.quantity === 1) {
         state.items = state.items.filter(item => item.id !== id)
-        state.totalAmount = state.totalAmount - existingItem.totalPrice
       } else {
         existingItem.quantity--;
         existingItem.totalPrice = existingItem.totalPrice - existingItem.price
-        state.totalAmount = state.totalAmount - existingItem.price
       }
     },
     deleteFromBasket(state, action) {

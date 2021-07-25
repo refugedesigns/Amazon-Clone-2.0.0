@@ -5,14 +5,18 @@ import Currency from "react-currency-formatter"
 
 import { useSelector, useDispatch} from "react-redux"
 import { useState } from "react"
+import { useSession } from "next-auth/client"
 import { selectItems, emptyBasket, selectTotalQuantity, selectTotalAmount } from "../slices/basketSlice"
 
 const CheckoutPage = () => {
     const items = useSelector(selectItems)
     const totalQuantity = useSelector(selectTotalQuantity)
-    const totalAmount = useSelector(selectTotalAmount)
-    const [session] = useState(false)
     const dispatch = useDispatch()
+    const [session, loading] = useSession()
+
+    const totalAmount = items.reduce((currNumber, item) => {
+        return currNumber + item.totalPrice
+    }, 0)
 
     const clearBasketHandler = () => {
         dispatch(emptyBasket())
@@ -31,7 +35,7 @@ const CheckoutPage = () => {
                         />
 
                         <div className="flex flex-col p-5 space-y-10 bg-white">
-                            <h1 className="text-3xl border-b pb-4 flex justify-between">{items.length > 0 ? "Shopping Basket" : "Your Amazon Basket is empty" } <button className="text-sm button" onClick={clearBasketHandler}>Clear your basket</button></h1>
+                        <h1 className="text-3xl border-b pb-4 flex justify-between">{items.length > 0 ? "Shopping Basket" : "Your Amazon Basket is empty"} {items.length > 0 && <button className="text-sm button" onClick={clearBasketHandler}>Clear your basket</button>}</h1>
 
                         {items.map(item => (
                             <CheckoutProduct

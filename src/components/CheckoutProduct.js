@@ -4,7 +4,7 @@ import Currency from "react-currency-formatter"
 import { addToBasket, removeFromBasket, deleteFromBasket } from "../slices/basketSlice"
 import { useDispatch } from "react-redux"
 
-const CheckoutProduct = ({id,quantity, title, price, rating, description, image, hasPrime}) => {
+const CheckoutProduct = ({id, quantity, title, price, rating, description, image, hasPrime}) => {
     const dispatch = useDispatch()
 
     const decreaseItemHandler = () => {

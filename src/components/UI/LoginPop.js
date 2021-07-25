@@ -1,12 +1,44 @@
+import onClickOutside from "react-onclickoutside";
+import { useSession, signOut } from "next-auth/client";
+import { useRouter } from "next/router";
 
+const LoginPop = ({ setShowPop }) => {
+  const [session, loading] = useSession()  
+  const router = useRouter();
 
-const LoginPop = () => {
-    return (
-        <div className="absolute top-12 right- w-38 h-24 flex flex-col p-4 bg-white space-y-2">
-            <button className="button text-gray-800 text-xs font-semibold">Sign in</button>
-            <p className="text-gray-600 text-xs">New customer? <span className="text-blue-600 cursor-pointer hover:underline hover:text-yellow-500">Start here</span></p>
-        </div>
-    )
-}
+  LoginPop.handleClickOutside = (event) => {
+    setShowPop(false);
+  };
 
-export default LoginPop
+  const authenticate = () => {
+    if (!session) {
+      router.push("/signin");
+    } else {
+      signOut();
+    }
+  };
+  return (
+    <div className="absolute top-12 w-38 h-2/3 flex flex-col justify-center p-4 bg-white">
+      <button
+        className="button text-gray-800 text-xs font-semibold grid place-content-center"
+        onClick={authenticate}
+      >
+        {!session ? "Sign in" : "Logout"}
+      </button>
+      {!session && (
+        <p className="text-gray-600 text-xs">
+          New customer?{" "}
+          <span className="text-blue-600 cursor-pointer hover:underline hover:text-yellow-500" onClick={() => router.push("/signup")}>
+            Start here
+          </span>
+        </p>
+      )}
+    </div>
+  );
+};
+
+const clickOutsideConfig = {
+  handleClickOutside: () => LoginPop.handleClickOutside,
+};
+
+export default onClickOutside(LoginPop, clickOutsideConfig);

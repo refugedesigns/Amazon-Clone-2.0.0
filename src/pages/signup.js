@@ -1,3 +1,4 @@
+import { getSession } from "next-auth/client"
 import Signup from "../components/Signup"
 
 const SignupPage = () => {
@@ -9,3 +10,20 @@ const SignupPage = () => {
 }
 
 export default SignupPage
+
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+    }
+    
+    return {
+        props: { session }
+    }
+}

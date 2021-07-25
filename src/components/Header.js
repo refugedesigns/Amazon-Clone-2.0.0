@@ -2,6 +2,7 @@ import Image from "next/image"
 import { useSelector } from "react-redux"
 import { useRouter } from "next/dist/client/router"
 import { useState } from "react"
+import { useSession } from "next-auth/client"
 
 import { MenuIcon, SearchIcon, ShoppingCartIcon } from "@heroicons/react/outline"
 
@@ -12,6 +13,9 @@ import LoginPop from "./UI/LoginPop"
 const Header = () => {
     const totalQuantity = useSelector(selectTotalQuantity)
     const router = useRouter()
+    const [session, loading] = useSession()
+    const [showPop,  setShowPop] = useState(false)
+
     
     return (
         <header className="sticky top-0 z-50">
@@ -29,14 +33,15 @@ const Header = () => {
 
             {/* Right */}
             <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
-                <div className="link" onClick={() => router.push("/signin")} >
-                    <p>Hello Erasmus Antwi</p>
+                <div className="link" onClick={() => setShowPop(true)} >
+                    <p>{session ? `Hello, ${session.user.name}` : "Hello, signin"}</p>
                     <p className="font-extrabold md:text-sm">Account & Lists</p>
-                </div>
-                <div className="link">
-                    <p>Returns</p>
-                    <p className="font-extrabold md:text-sm">& Orders</p>
-                </div>
+                    </div>
+                    {showPop && <LoginPop setShowPop={setShowPop} />}
+                    {session && <div className="link">
+                        <p>Returns</p>
+                        <p className="font-extrabold md:text-sm">& Orders</p>
+                    </div>}
 
                 <div className="relative link flex items-center" onClick={() => router.push("/checkout")}>
                     <ShoppingCartIcon className="h-10" />
