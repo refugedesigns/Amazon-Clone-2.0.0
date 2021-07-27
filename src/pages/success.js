@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 import { emptyBasket } from "../slices/basketSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react"
+import { getSession } from "next-auth/client"
 
 const SuccessPage = ({session}) => {
     const router = useRouter()
