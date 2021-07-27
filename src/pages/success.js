@@ -5,7 +5,7 @@ import { emptyBasket } from "../slices/basketSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react"
 
-const SuccessPage = () => {
+const SuccessPage = ({session}) => {
     const router = useRouter()
     const dispatch = useDispatch()
     
@@ -15,7 +15,7 @@ const SuccessPage = () => {
         })
     }, [])
     return (
-    <Wrapper>
+    <Wrapper session={session}>
       <main className="min-h-screen max-w-screen-lg mx-auto">
         <div className="flex flex-col p-10 bg-white">
           <div className="flex items-center space-x-2 mb-5">
@@ -37,3 +37,13 @@ const SuccessPage = () => {
 };
 
 export default SuccessPage;
+
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+
+  return {
+    props: {
+      session,
+    },
+  };
+}
