@@ -14,11 +14,7 @@ const LoginPop = ({ setShowPop }) => {
     if (!session) {
       router.push("/signin");
     } else {
-      const result = await signOut();
-
-      if (!result.error) {
-        router.push("/");
-      }
+      signOut({ callbackUrl: "https://amazon-clone-200.herokuapp.com" });
     }
   };
   return (
