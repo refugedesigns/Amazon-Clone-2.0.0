@@ -4,8 +4,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start -p $PORT",
-    "heroku-postbuild": "npm run build"
+    "start": "next start",
+    "export": "next export"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -24,7 +24,7 @@
     "micro": "^9.3.4",
     "moment": "^2.29.1",
     "mongoose": "^5.13.3",
-    "next": "latest",
+    "next": "^11.0.0",
     "next-auth": "^3.27.3",
     "react": "17.0.1",
     "react-currency-formatter": "^1.1.0",
