@@ -23,7 +23,8 @@ export default NextAuth({
           await mongoose.disconnect();
           throw new Error("No user found!");
         }
-
+        console.log(loginInfo)
+        console.log(user)
         const isValid = await verifyPassword(loginInfo.password, user.password);
 
         if (!isValid) {
