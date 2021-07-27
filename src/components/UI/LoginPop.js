@@ -3,18 +3,22 @@ import { useSession, signOut } from "next-auth/client";
 import { useRouter } from "next/router";
 
 const LoginPop = ({ setShowPop }) => {
-  const [session, loading] = useSession()  
+  const [session, loading] = useSession();
   const router = useRouter();
 
   LoginPop.handleClickOutside = (event) => {
     setShowPop(false);
   };
 
-  const authenticate = () => {
+  const authenticate = async () => {
     if (!session) {
       router.push("/signin");
     } else {
-      signOut();
+      const result = await signOut();
+
+      if (!result.error) {
+        router.push("/");
+      }
     }
   };
   return (
@@ -28,7 +32,10 @@ const LoginPop = ({ setShowPop }) => {
       {!session && (
         <p className="text-gray-600 text-xs">
           New customer?{" "}
-          <span className="text-blue-600 cursor-pointer hover:underline hover:text-yellow-500" onClick={() => router.push("/signup")}>
+          <span
+            className="text-blue-600 cursor-pointer hover:underline hover:text-yellow-500"
+            onClick={() => router.push("/signup")}
+          >
             Start here
           </span>
         </p>
