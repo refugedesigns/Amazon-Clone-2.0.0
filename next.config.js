@@ -9,5 +9,6 @@ module.exports = {
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     HOST: process.env.HOST,
     STRIPE_SIGNING_SECRET: process.env.STRIPE_SIGNING_SECRET,
+    BASE_URL: "https://amazon-clone-200.herokuapp.com/",
   },
 };
