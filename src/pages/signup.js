@@ -1,12 +1,19 @@
 import { getSession } from "next-auth/client"
 import Signup from "../components/Signup"
+import Head from "next/head"
+import { Fragment } from "react"
 
 const SignupPage = () => {
-    return (
-        <div className="h-screen max-w-screen-2xl mx-auto">
-            <Signup />
-        </div>
-    )
+  return (
+    <Fragment>
+      <Head>
+        <title>Amazon 2.0.0 Signup</title>
+      </Head>
+      <div className="h-screen max-w-screen-2xl mx-auto">
+        <Signup />
+      </div>
+    </Fragment>
+  );
 }
 
 export default SignupPage

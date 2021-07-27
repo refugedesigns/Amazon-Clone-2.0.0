@@ -2,7 +2,7 @@ import Image from "next/image"
 import { useSelector } from "react-redux"
 import { useRouter } from "next/dist/client/router"
 import { useState } from "react"
-import { useSession } from "next-auth/client"
+
 
 import { MenuIcon, SearchIcon, ShoppingCartIcon } from "@heroicons/react/outline"
 
@@ -10,10 +10,9 @@ import { selectTotalQuantity } from "../slices/basketSlice"
 
 import LoginPop from "./UI/LoginPop"
 
-const Header = () => {
+const Header = ({session}) => {
     const totalQuantity = useSelector(selectTotalQuantity)
     const router = useRouter()
-    const [session, loading] = useSession()
     const [showPop,  setShowPop] = useState(false)
 
     
@@ -38,7 +37,7 @@ const Header = () => {
                     <p className="font-extrabold md:text-sm">Account & Lists</p>
                     </div>
                     {showPop && <LoginPop setShowPop={setShowPop} />}
-                    {session && <div className="link">
+                    {session && <div className="link" onClick={() => router.push("/orders")}>
                         <p>Returns</p>
                         <p className="font-extrabold md:text-sm">& Orders</p>
                     </div>}

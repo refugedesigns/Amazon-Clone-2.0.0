@@ -1,14 +1,16 @@
 {
-    "editor.fontSize": 19,
-    "editor.fontFamily": "Fira Code, Consolas, 'Courier New', monospace",
-    "editor.fontLigatures": null,
-    "eslint.format.enable": true,
-    "emmet.includeLanguages": {
-        "javascript": "javascriptreact"
-    },
-    "files.autoSave": "afterDelay",
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.formatOnType": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.fontSize": 19,
+  "editor.fontFamily": "Fira Code, Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": null,
+  "eslint.format.enable": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "files.autoSave": "afterDelay",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "html.format.contentUnformatted": "",
+  "editor.autoIndent": "none"
 }

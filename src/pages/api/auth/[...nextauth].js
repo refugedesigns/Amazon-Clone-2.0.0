@@ -19,7 +19,6 @@ export default NextAuth({
         }
 
         const user = await User.findOne({ email: credentials.email });
-        console.log(user)
         if (!user) {
           await mongoose.disconnect();
           throw new Error("No user found!");

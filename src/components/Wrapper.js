@@ -5,7 +5,7 @@ import Footer from "./Footer"
 const Wrapper = (props) => {
     return (
         <div className="min-h-screen">
-            <Header />
+            <Header session={props.session} />
             { props.children }
             <Footer />
         </div>
