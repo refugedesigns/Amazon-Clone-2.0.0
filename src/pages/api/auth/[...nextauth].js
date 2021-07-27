@@ -11,23 +11,20 @@ export default NextAuth({
   },
   providers: [
     Providers.Credentials({
-      async authorize(credentials) {
+      async authorize(loginInfo) {
         try {
           await connectDb();
         } catch (err) {
           throw new Error("Failed to connect to database!");
         }
 
-        const user = await User.findOne({ email: credentials.email });
+        const user = await User.findOne({ email: loginInfo.email });
         if (!user) {
           await mongoose.disconnect();
           throw new Error("No user found!");
         }
 
-        const isValid = await verifyPassword(
-          credentials.password,
-          user.password
-        );
+        const isValid = await verifyPassword(loginInfo.password, user.password);
 
         if (!isValid) {
           await mongoose.disconnect();
