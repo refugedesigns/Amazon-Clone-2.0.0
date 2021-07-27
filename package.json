@@ -20,6 +20,7 @@
     "@tailwindcss/line-clamp": "^0.2.0",
     "bcrypt": "^5.0.1",
     "firebase-admin": "^9.10.0",
+    "micro": "^9.3.4",
     "moment": "^2.29.1",
     "mongoose": "^5.13.3",
     "next": "latest",
