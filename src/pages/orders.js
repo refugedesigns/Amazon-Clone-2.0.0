@@ -48,7 +48,12 @@ export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
 
   if (!session) {
-    return {};
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
   }
 
   try {
@@ -76,7 +81,6 @@ export async function getServerSideProps(context) {
     }))
   );
 
-  console.log(orders);
   return {
     props: {
       session,
